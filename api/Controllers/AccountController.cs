@@ -12,12 +12,12 @@ namespace api.Controllers;
 public class AccountController : ControllerBase
 {
   private readonly UserManager<User> _userManager;
-  //private readonly SignInManager<User> _signInManager;
+  private readonly SignInManager<User> _signInManager;
   private readonly ITokenService _tokenService;
-  public AccountController(UserManager<User> userManager, ITokenService tokenService)
+  public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
   {
     _userManager = userManager;
-    //_signInManager = signInManager;
+    _signInManager = signInManager;
     _tokenService = tokenService;
   }
 
@@ -67,5 +67,12 @@ public class AccountController : ControllerBase
       return Unauthorized("Invalid password");
 
     return Ok(new { message = "Logged in", Token = _tokenService.CreateToken(user) });
+  }
+
+  [HttpPost("logout")]
+  public async Task<IActionResult> Logout()
+  {
+    await _signInManager.SignOutAsync();
+    return Ok(new { message = "Logged out" });
   }
 }
