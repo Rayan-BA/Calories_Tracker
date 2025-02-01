@@ -1,13 +1,12 @@
 ﻿using api.Interfaces;
 using api.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;
 
 [Route("api/foods")]
 [ApiController]
-[Authorize]
+//[Authorize] uncomment
 public class FoodController : ControllerBase
 {
   private readonly IFoodRepository _foodRepository;
@@ -18,7 +17,6 @@ public class FoodController : ControllerBase
   }
 
   [HttpGet]
-  //[Authorize]
   public async Task<IActionResult> GetFoods()
   {
     var foods = await _foodRepository.GetFoods();
@@ -27,7 +25,6 @@ public class FoodController : ControllerBase
   }
 
   [HttpGet("{id}")]
-  //[Authorize]
   public async Task<IActionResult> GetFood([FromRoute] string id)
   {
     var food = await _foodRepository.GetFood(id);
@@ -39,7 +36,6 @@ public class FoodController : ControllerBase
   }
 
   [HttpPost]
-  //[Authorize]
   public async Task<IActionResult> CreateFood([FromBody] Food food)
   {
     await _foodRepository.CreateFood(food);
@@ -48,7 +44,6 @@ public class FoodController : ControllerBase
   }
 
   [HttpPut("{id}")]
-  //[Authorize]
   public async Task<IActionResult> UpdateFood([FromRoute] string id, [FromBody] Food food)
   {
     var updatedFood = await _foodRepository.UpdateFood(id, food);
@@ -60,7 +55,6 @@ public class FoodController : ControllerBase
   }
 
   [HttpDelete("{id}")]
-  //[Authorize]
   public async Task<IActionResult> DeleteFood([FromRoute] string id)
   {
     var deletedFood = await _foodRepository.DeleteFood(id);
