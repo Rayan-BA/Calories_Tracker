@@ -50,6 +50,8 @@ internal class Program
     builder.Services.AddControllers();
 
     builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+    builder.Services.AddScoped<IMealRepository, MealRepository>();
+    builder.Services.AddScoped<IMealFoodRepository, MealFoodRepository>();
     builder.Services.AddScoped<ITokenService, TokenService>();
 
     builder.Services.AddSingleton<MongoDBService>();

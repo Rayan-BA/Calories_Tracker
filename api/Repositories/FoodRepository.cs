@@ -41,10 +41,10 @@ public class FoodRepository : IFoodRepository
     return foods;
   }
 
-  public async Task<Food> UpdateFood(string id, Food updatedFood)
+  public async Task<Food> UpdateFood(string id, Food food)
   {
     var filter = Builders<Food>.Filter.Eq(f => f.Id, id);
-    var food = await _foodsCollection.FindOneAndReplaceAsync(filter, updatedFood);
+    var updatedFood = await _foodsCollection.FindOneAndReplaceAsync(filter, food);
     return updatedFood;
   }
 }
