@@ -4,11 +4,11 @@ namespace api.DTOs.Account;
 
 public class RegisterDTO
 {
-  [Required]
+  [Required(ErrorMessage = "Username required")]
   public string? Username { get; set; }
-  [Required]
+  [Required(ErrorMessage = "Email required")]
   [EmailAddress]
   public string? Email { get; set; }
-  [Required]
+  [Required(ErrorMessage = "Password required")]
   public string? Password { get; set; }
 }
