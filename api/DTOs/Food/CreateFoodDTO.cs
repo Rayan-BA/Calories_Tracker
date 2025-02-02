@@ -11,7 +11,7 @@ public class CreateFoodDTO
   [MaxLength(50, ErrorMessage = "Brand too long")]
   public string? Brand { get; set; }
   [Required(ErrorMessage = "Serving size required")]
-  [Range(0, int.MaxValue, ErrorMessage = "Serving size must be greater than 0")]
+  //[Range(0, int.MaxValue, ErrorMessage = "Serving size must be greater than 0")]
   public int ServingSize { get; set; }
   [Required(ErrorMessage = "Serving size unit required")]
   [MaxLength(10, ErrorMessage = "Serving size unit too long")]

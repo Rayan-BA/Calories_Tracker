@@ -19,7 +19,19 @@ public class FoodController(IFoodRepository foodRepository) : ControllerBase
   {
     var foods = await _foodRepository.GetFoods();
 
-    return Ok(foods.Adapt<FoodDTO>());
+    if (foods.Count() == 0)
+    {
+      return Ok(Array.Empty<FoodDTO>());
+    }
+
+    // configure and use mapster with lists later
+    var foodsDTO = new List<FoodDTO>();
+    foreach(var f in foods)
+    {
+      foodsDTO.Add(f.Adapt<FoodDTO>());
+    }
+
+    return Ok(foodsDTO);
   }
 
   [HttpGet("{id}")]
@@ -34,17 +46,18 @@ public class FoodController(IFoodRepository foodRepository) : ControllerBase
   }
 
   [HttpPost]
-  public async Task<IActionResult> CreateFood([FromBody] Food food)
+  public async Task<IActionResult> CreateFood([FromBody] CreateFoodDTO foodDto)
   {
-    await _foodRepository.CreateFood(food);
+    var food = await _foodRepository.CreateFood(foodDto.Adapt<Food>());
 
-    return CreatedAtAction(nameof(GetFood), new { id = food.Id }, food);
+    return CreatedAtAction(nameof(GetFood), new { id = food.Id }, foodDto);
   }
 
   [HttpPut("{id}")]
   public async Task<IActionResult> UpdateFood([FromRoute] string id, [FromBody] FoodDTO foodDTO)
   {
     var food = foodDTO.Adapt<Food>();
+    food.Id = id;
     var updatedFood = await _foodRepository.UpdateFood(id, food);
 
     if (updatedFood == null)

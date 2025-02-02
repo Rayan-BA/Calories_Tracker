@@ -40,6 +40,6 @@ public class MealRepository(MongoDBService mongoDBService) : IMealRepository
   {
     var filter = Builders<Meal>.Filter.Eq(m => m.Id, id);
     var updatedMeal = await _mealsCollection.FindOneAndReplaceAsync(filter, meal);
-    return updatedMeal;
+    return meal;
   }
 }
