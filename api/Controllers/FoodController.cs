@@ -1,27 +1,25 @@
-﻿using api.Interfaces;
+﻿using api.DTOs.Food;
+using api.Interfaces;
 using api.Models;
+using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;
 
 [Route("api/foods")]
 [ApiController]
-//[Authorize] uncomment
-public class FoodController : ControllerBase
+[Authorize]
+public class FoodController(IFoodRepository foodRepository) : ControllerBase
 {
-  private readonly IFoodRepository _foodRepository;
-
-  public FoodController(IFoodRepository foodRepository)
-  {
-    _foodRepository = foodRepository;
-  }
+  private readonly IFoodRepository _foodRepository = foodRepository;
 
   [HttpGet]
   public async Task<IActionResult> GetFoods()
   {
     var foods = await _foodRepository.GetFoods();
 
-    return Ok(foods);
+    return Ok(foods.Adapt<FoodDTO>());
   }
 
   [HttpGet("{id}")]
@@ -32,7 +30,7 @@ public class FoodController : ControllerBase
     if (food == null)
       return NotFound("Food not found");
 
-    return Ok(food);
+    return Ok(food.Adapt<FoodDTO>());
   }
 
   [HttpPost]
@@ -44,14 +42,15 @@ public class FoodController : ControllerBase
   }
 
   [HttpPut("{id}")]
-  public async Task<IActionResult> UpdateFood([FromRoute] string id, [FromBody] Food food)
+  public async Task<IActionResult> UpdateFood([FromRoute] string id, [FromBody] FoodDTO foodDTO)
   {
+    var food = foodDTO.Adapt<Food>();
     var updatedFood = await _foodRepository.UpdateFood(id, food);
 
     if (updatedFood == null)
       return NotFound("Food not found");
 
-    return Ok(updatedFood);
+    return Ok(foodDTO);
   }
 
   [HttpDelete("{id}")]
@@ -62,6 +61,6 @@ public class FoodController : ControllerBase
     if (deletedFood == null)
       return NotFound("Food not found");
 
-    return Ok(deletedFood);
+    return Ok(deletedFood.Adapt<FoodDTO>());
   }
 }

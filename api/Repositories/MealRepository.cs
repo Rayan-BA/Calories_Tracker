@@ -5,14 +5,9 @@ using MongoDB.Driver;
 
 namespace api.Repositories;
 
-public class MealRepository : IMealRepository
+public class MealRepository(MongoDBService mongoDBService) : IMealRepository
 {
-  private readonly IMongoCollection<Meal> _mealsCollection;
-
-  public MealRepository(MongoDBService mongoDBService)
-  {
-    _mealsCollection = mongoDBService.Database.GetCollection<Meal>("meals");
-  }
+  private readonly IMongoCollection<Meal> _mealsCollection = mongoDBService.Database.GetCollection<Meal>("meals");
 
   public async Task<Meal> CreateMeal(Meal meal)
   {
