@@ -6,7 +6,6 @@ using api.Models;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 namespace api.Controllers;
 
@@ -32,14 +31,14 @@ public class MealController(IMealRepository mealRepository, IFoodRepository food
 
     if (meal == null)
       return NotFound("Meal not found");
-    
+
     return Ok(meal.Adapt<MealDTO>());
   }
 
   [HttpPost]
   public async Task<IActionResult> CreateMeal([FromBody] CreateMealDTO mealDTO)
   {
-    var meal = mealDTO.Adapt<Meal>();  
+    var meal = mealDTO.Adapt<Meal>();
 
     meal = await _mealRepository.CreateMeal(meal);
 
@@ -64,10 +63,10 @@ public class MealController(IMealRepository mealRepository, IFoodRepository food
     }
 
     var updatedMeal = await _mealRepository.UpdateMeal(id, meal);
-    
+
     if (updatedMeal == null)
       return NotFound("Meal not found");
-    
+
     return Ok(updatedMeal.Adapt<MealDTO>());
   }
 
@@ -75,7 +74,7 @@ public class MealController(IMealRepository mealRepository, IFoodRepository food
   public async Task<IActionResult> DeleteMeal([FromRoute] string id)
   {
     var deletedMeal = await _mealRepository.DeleteMeal(id);
-    
+
     if (deletedMeal == null)
       return NotFound("Meal not found");
 

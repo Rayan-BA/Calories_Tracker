@@ -1,6 +1,7 @@
-﻿using api.Interfaces;
+﻿#pragma warning disable CS8604
+
+using api.Interfaces;
 using api.Models;
-using AspNetCore.Identity.MongoDbCore.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -23,8 +24,8 @@ public class TokenService : ITokenService
   {
     var claims = new List<Claim>
     {
-      new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
-      new Claim(JwtRegisteredClaimNames.Email, user.Email)
+      new(JwtRegisteredClaimNames.GivenName, user.UserName),
+      new(JwtRegisteredClaimNames.Email, user.Email)
     };
     var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
     var tokenDescriptor = new SecurityTokenDescriptor

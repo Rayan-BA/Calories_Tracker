@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace api.DTOs.Food;
+﻿namespace api.DTOs.Food;
 
 public class FoodDTO
 {

@@ -1,4 +1,6 @@
-﻿using api.DTOs.Account;
+﻿#pragma warning disable CS8604
+
+using api.DTOs.Account;
 using api.Interfaces;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
@@ -8,17 +10,11 @@ namespace api.Controllers;
 
 [Route("api/account")]
 [ApiController]
-public class AccountController : ControllerBase
+public class AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager) : ControllerBase
 {
-  private readonly UserManager<User> _userManager;
-  private readonly SignInManager<User> _signInManager;
-  private readonly ITokenService _tokenService;
-  public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
-  {
-    _userManager = userManager;
-    _signInManager = signInManager;
-    _tokenService = tokenService;
-  }
+  private readonly UserManager<User> _userManager = userManager;
+  private readonly SignInManager<User> _signInManager = signInManager;
+  private readonly ITokenService _tokenService = tokenService;
 
   [HttpPost("register")]
   public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)

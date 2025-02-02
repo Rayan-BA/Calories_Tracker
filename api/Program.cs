@@ -1,3 +1,5 @@
+#pragma warning disable CS8604
+
 using api.Interfaces;
 using api.Models;
 using api.Repositories;
@@ -42,7 +44,7 @@ internal class Program
                     Id="Bearer"
                 }
             },
-            new string[]{}
+            Array.Empty<string>()
         }
     });
     });
@@ -51,7 +53,6 @@ internal class Program
 
     builder.Services.AddScoped<IFoodRepository, FoodRepository>();
     builder.Services.AddScoped<IMealRepository, MealRepository>();
-    builder.Services.AddScoped<IMealFoodRepository, MealFoodRepository>();
     builder.Services.AddScoped<ITokenService, TokenService>();
 
     builder.Services.AddSingleton<MongoDBService>();
