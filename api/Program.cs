@@ -53,6 +53,8 @@ internal class Program
 
     builder.Services.AddScoped<IFoodRepository, FoodRepository>();
     builder.Services.AddScoped<IMealRepository, MealRepository>();
+    builder.Services.AddScoped<IMealEntryRepository, MealEntryRepository>();
+    builder.Services.AddScoped<IFoodEntryRepository, FoodEntryRepository>();
     builder.Services.AddScoped<ITokenService, TokenService>();
 
     builder.Services.AddSingleton<MongoDBService>();
