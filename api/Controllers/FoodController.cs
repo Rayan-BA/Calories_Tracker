@@ -19,7 +19,7 @@ public class FoodController(IFoodRepository foodRepository) : ControllerBase
   {
     var foods = await _foodRepository.GetFoods();
 
-    if (foods.Count() == 0)
+    if (foods.Count == 0)
     {
       return Ok(Array.Empty<FoodDTO>());
     }

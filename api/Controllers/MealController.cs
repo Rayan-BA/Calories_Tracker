@@ -23,7 +23,7 @@ public class MealController(IMealRepository mealRepository, IFoodRepository food
   {
     var meals = await _mealRepository.GetMeals();
     
-    if (meals.Count() == 0)
+    if (meals.Count == 0)
       return Ok(Array.Empty<MealDTO>());
 
 
@@ -32,7 +32,7 @@ public class MealController(IMealRepository mealRepository, IFoodRepository food
     var mealsDTO = new List<MealDTO>();
     foreach (var m in meals)
     {
-      for (var i = 0; i < m.Foods.Count(); i++)
+      for (var i = 0; i < m.Foods.Count; i++)
       {
         m.Foods[i].Adapt<FoodDTO>();
       }

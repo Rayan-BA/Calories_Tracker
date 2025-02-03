@@ -16,4 +16,8 @@ public class Meal
   public string? Description { get; set; }
   [BsonElement("foods")]
   public List<Food>? Foods { get; set; }
+  [BsonElement("created_by"), BsonRepresentation(BsonType.ObjectId)]
+  public string? CreatedBy { get; set; } // UserId
+  [BsonElement("created_at")]
+  public DateTime CreatedAt { get; set; } = DateTime.Now;
 }

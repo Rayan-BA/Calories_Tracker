@@ -23,4 +23,8 @@ public class Food
   public string? ServingSizeUnit { get; set; }
   [BsonElement("nutritional_facts")]
   public List<KeyValuePair<string, float>>? NutritionalFacts { get; set; }
+  [BsonElement("created_by"), BsonRepresentation(BsonType.ObjectId)]
+  public string? CreatedBy { get; set; } // UserId
+  [BsonElement("created_at")]
+  public DateTime CreatedAt { get; set; } = DateTime.Now;
 }
