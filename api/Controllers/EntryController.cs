@@ -3,6 +3,7 @@ using api.DTOs.MealEntry;
 using api.Interfaces;
 using api.Models;
 using Mapster;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers;
@@ -104,7 +105,7 @@ public class EntryController(IFoodEntryRepository foodEntryRepository, IMealEntr
   public async Task<IActionResult> DeleteFoodEntry([FromRoute] string id)
   {
     var deletedFoodEntry = await _foodEntryRepository.DeleteFoodEntry(id);
-
+    
     if (deletedFoodEntry == null)
       return NotFound("Food entry not found");
 

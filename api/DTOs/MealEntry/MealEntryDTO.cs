@@ -6,6 +6,6 @@ namespace api.DTOs.MealEntry;
 
 public class MealEntryDTO
 {
-  public MealDTO? Meal { get; set; }
+  public string? MealId { get; set; }
   public string? CreatedBy { get; set; }
 }

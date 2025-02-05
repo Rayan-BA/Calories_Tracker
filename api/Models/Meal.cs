@@ -14,8 +14,9 @@ public class Meal
   public string? Name { get; set; }
   [BsonElement("description")]
   public string? Description { get; set; }
-  [BsonElement("foods")]
-  public List<Food>? Foods { get; set; }
+  [BsonElement("food_ids")]
+  public List<string>? FoodIds { get; set; }
+  //public List<Food>? Foods { get; set; }
   [BsonElement("created_by"), BsonRepresentation(BsonType.ObjectId)]
   public string? CreatedBy { get; set; } // UserId
   [BsonElement("created_at")]

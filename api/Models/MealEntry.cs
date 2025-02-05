@@ -10,8 +10,8 @@ public class MealEntry
   [BsonId]
   [BsonElement("_id"), BsonRepresentation(BsonType.ObjectId)]
   public string? Id { get; set; }
-  [BsonElement("meal")]
-  public Meal? Meal { get; set; }
+  [BsonElement("meal_id"), BsonRepresentation(BsonType.ObjectId)]
+  public string? MealId { get; set; }
   [BsonElement("created_by"), BsonRepresentation(BsonType.ObjectId)]
   public string? CreatedBy { get; set; } // UserId
   [BsonElement("created_at")]

@@ -10,8 +10,8 @@ public class FoodEntry
   [BsonId]
   [BsonElement("_id"), BsonRepresentation(BsonType.ObjectId)]
   public string? Id { get; set; }
-  [BsonElement("food")]
-  public Food? Food { get; set; }
+  [BsonElement("food_id"), BsonRepresentation(BsonType.ObjectId)]
+  public string? FoodId { get; set; }
   [BsonElement("serving_size")]
   public int ServingSize { get; set; }
   [BsonElement("serving_size_unit")]
