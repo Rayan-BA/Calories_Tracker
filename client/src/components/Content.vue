@@ -1,11 +1,7 @@
-<script setup>
-  import Navbar from './Navbar.vue';
-  import Main from './Main.vue';
-</script>
+<script setup></script>
 
 <template>
-  <section class="content-wrapper w-100">
-    <Navbar />
-    <Main />
+  <section class="w-100">
+    <h1>Content</h1>
   </section>
 </template>
